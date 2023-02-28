@@ -2,8 +2,7 @@ from itertools import product
 from random import sample
 from typing import Optional, Union
 
-from .sudoku import Sudoku, SudokuBoard
-from .utils import _recursive_solve
+from sudoku_gaming.sudoku import Sudoku, SudokuBoard
 
 
 def generate(difficulty: int = 5) -> Sudoku:
@@ -28,17 +27,20 @@ def generate(difficulty: int = 5) -> Sudoku:
         difficulty = 9
 
     # use the solver to generate a valid sudoku
-    sudoku = _recursive_solve(Sudoku())
-    assert sudoku is not None  # to satisfy mypy, by definition can't be None
+    sudoku = Sudoku()
+    assert sudoku.solved is not None
+    sudoku._board = sudoku.solved
 
     # use the provided difficulty to calculate how many cells to clear
     num_to_clear = 72 - int(63 * ((9 - difficulty) / 8))
 
     # choose them randomly, and set to 0
-    all_cells = list(product(range(9), range(9)))
+    all_cells = list(product(range(1, 10), range(1, 10)))
     cells_to_clear = sample(all_cells, num_to_clear)
     for (x, y) in cells_to_clear:
         sudoku.set(x, y, 0)
+
+    sudoku._original = sudoku.board  # reset the original
 
     return Sudoku(sudoku.board)
 
@@ -55,31 +57,12 @@ def solve(sudoku: Union[Sudoku, SudokuBoard, str]) -> Optional[Sudoku]:
     Returns
     -------
     Optional[Sudoku]
-        The solved Sudoku, if a solution exists, otherwise None.
+        A Sudoku object, containing the original puzzle and the solution, if one exists.
     """
     # before solving, wrap the puzzle in the Sudoku class and check it's valid
     if not isinstance(sudoku, Sudoku):
         sudoku = Sudoku(sudoku)
 
-    # try to find the solution
-    return _recursive_solve(sudoku)
-
-
-def play(sudoku: Union[Sudoku, SudokuBoard, str]) -> Sudoku:
-    """
-    Play a game of sudoku!
-
-    Parameters
-    ----------
-    sudoku : Union[Sudoku, SudokuBoard, str]
-        A sudoku puzzle in any of the supported formats.
-
-    Returns
-    -------
-        The current state of the Sudoku when ending the play session.
-    """
-    # before playing, wrap the puzzle in the Sudoku class and check it's valid
-    if not isinstance(sudoku, Sudoku):
-        sudoku = Sudoku(sudoku)
-
-    raise NotImplementedError("The play method is not yet implemented...")
+    # try to solve, and return
+    sudoku.solve_original()
+    return sudoku

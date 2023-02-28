@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+
+[project]
+name = "sudoku_gaming"
+version = "0.0.1"
+description = "A sudoku gameplay client."
+readme = "README.md"
+authors = [{ name = "Lukas Twist", email = "itsluketwist@gmail.com" }]
+license = { file = "LICENSE" }
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+]
+keywords = ["sudoku", "solver", "gameplay"]
+dependencies = []
+requires-python = ">=3.11"
+
+[project.optional-dependencies]
+dev = ["pre-commit"]
+
+[project.urls]
+Homepage = "https://github.com/itsluketwist/sudoku-gaming"
