@@ -96,7 +96,6 @@ pytest .
 ## *to-do*
 
 - Complete `Sudoku.save_as_image(...)` method.
-- Add some basic testing.
 
 
 ## *inspiration*

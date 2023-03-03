@@ -16,7 +16,7 @@ def _board_string(board: SudokuBoard, title: str = "Sudoku") -> str:
     Returns
     -------
     str
-        ???
+        A printable string representation of the given sudoku board.
     """
     return (
         f"\n{title}:\n"
@@ -64,6 +64,49 @@ def _find_possible_values(sudoku: SudokuBoard, row: int, col: int):
     sudoku_nums = {1, 2, 3, 4, 5, 6, 7, 8, 9}
     possible_nums = sudoku_nums - (row_nums | col_nums | grid_nums)
     return list(possible_nums)
+
+
+def _check_for_duplicates(board: SudokuBoard) -> bool:
+    """
+    Check for duplicate numbers in each row, column and grid of the sudoku board.
+
+    Parameters
+    ----------
+    board : SudokuBoard
+        The sudoku board to check.
+
+    Returns
+    -------
+    bool
+        True if duplicates are found, False otherwise.
+    """
+    # first check the rows and columns for their non-zero entries
+    for index in range(9):
+        row_nums = [board[index][y] for y in range(9) if board[index][y] != 0]
+        col_nums = [board[x][index] for x in range(9) if board[x][index] != 0]
+
+        # check for duplicates by comparing list size to set size
+        if len(row_nums) != len(set(row_nums)):
+            return True
+        if len(col_nums) != len(set(col_nums)):
+            return True
+
+    # now loop over each grid, checking for duplicates
+    for x_start in [0, 3, 6]:
+        for y_start in [0, 3, 6]:
+            grid_nums = set()
+            for x in range(x_start, x_start + 3):
+                for y in range(y_start, y_start + 3):
+
+                    # non-zero entries already seen are duplicates
+                    num = board[x][y]
+                    if num != 0 and num in grid_nums:
+                        return True
+                    else:
+                        grid_nums.add(num)
+
+    # no duplicates found
+    return False
 
 
 def _recursive_solve(sudoku: SudokuBoard) -> Optional[SudokuBoard]:

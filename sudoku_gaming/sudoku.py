@@ -2,7 +2,7 @@ from copy import deepcopy
 from typing import Optional, Union
 
 from sudoku_gaming.types import SudokuBoard
-from sudoku_gaming.utils import _board_string, _recursive_solve
+from sudoku_gaming.utils import _board_string, _check_for_duplicates, _recursive_solve
 
 
 class Sudoku:
@@ -60,7 +60,7 @@ class Sudoku:
             )
             return None
 
-        return self._board[row - 1][col - 1]
+        return self._board[9 - row][col - 1]
 
     def set(self, row: int, col: int, value: int) -> None:
         """
@@ -86,7 +86,7 @@ class Sudoku:
             print(f"Error: value must be between 0 and 9 only (value={value}).")
             return
 
-        self._board[row - 1][col - 1] = value
+        self._board[9 - row][col - 1] = value
 
     @property
     def board(self) -> SudokuBoard:
@@ -174,49 +174,8 @@ class Sudoku:
                 "Sudoku is invalid, has incorrect structure or values."
             ) from error
 
-        if self._check_for_duplicates():
+        if _check_for_duplicates(self._board):
             raise TypeError("Sudoku is invalid, has duplicate values.")
-
-    def _check_for_duplicates(self) -> bool:
-        """
-        Check for duplicate numbers in each row, column and grid of the current sudoku board.
-
-        Returns
-        -------
-        bool
-            True if duplicates are found, False otherwise.
-        """
-        # first check the rows and columns for their non-zero entries
-        for index in range(1, 10):
-            row_nums = [
-                self.get(index, y) for y in range(1, 10) if self.get(index, y) != 0
-            ]
-            col_nums = [
-                self.get(x, index) for x in range(1, 10) if self.get(x, index) != 0
-            ]
-
-            # check for duplicates by comparing list size to set size
-            if len(row_nums) != len(set(row_nums)):
-                return True
-            if len(col_nums) != len(set(col_nums)):
-                return True
-
-        # now loop over each grid, checking for duplicates
-        for x_start in [1, 4, 7]:
-            for y_start in [1, 4, 7]:
-                grid_nums = set()
-                for x in range(x_start, x_start + 3):
-                    for y in range(y_start, y_start + 3):
-
-                        # non-zero entries already seen are duplicates
-                        num = self.get(x, y)
-                        if num != 0 and num in grid_nums:
-                            return True
-                        else:
-                            grid_nums.add(num)
-
-        # no duplicates found
-        return False
 
     def save_as_image(self, location: str) -> None:
         """
