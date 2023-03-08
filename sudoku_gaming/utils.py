@@ -153,3 +153,48 @@ def _recursive_solve(sudoku: SudokuBoard) -> Optional[SudokuBoard]:
 
     # if no empty cell is found, sudoku must be complete
     return sudoku
+
+
+def _get_table_fill_color_matrix(color_1: str = "#CBE9FF", color_2: str = "#FDF2FF"):
+    """
+    Get the color fill matrix for when saving a sudoku as an image.
+
+    Parameters
+    ----------
+    color_1 : str
+    color_2 : str
+        Both colors must be valid color strings (as per plotly).
+    """
+    row_fill_1 = [
+        color_1,
+        color_1,
+        color_1,
+        color_2,
+        color_2,
+        color_2,
+        color_1,
+        color_1,
+        color_1,
+    ]
+    row_fill_2 = [
+        color_2,
+        color_2,
+        color_2,
+        color_1,
+        color_1,
+        color_1,
+        color_2,
+        color_2,
+        color_2,
+    ]
+    return [
+        row_fill_1,
+        row_fill_1,
+        row_fill_1,
+        row_fill_2,
+        row_fill_2,
+        row_fill_2,
+        row_fill_1,
+        row_fill_1,
+        row_fill_1,
+    ]

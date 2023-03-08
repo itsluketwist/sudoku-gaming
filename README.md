@@ -1,6 +1,6 @@
 # **sudoku-gaming**
 
-A sudoku gameplay client, including:
+A simple sudoku gameplay client, including:
 - a sudoku generator with difficulty options,
 - and an efficient sudoku solver using a depth-first backtracking algorithm.
 
@@ -11,6 +11,12 @@ Install directly from GitHub, using pip:
 
 ```shell
 pip install git+https://github.com/itsluketwist/sudoku-gaming
+```
+
+Use the `img` extra when installing to be able to save sudokus as images:
+
+```shell
+pip install git+https://github.com/itsluketwist/sudoku-gaming#egg=sudoku_gaming[img]
 ```
 
 
@@ -69,15 +75,19 @@ Clone the repository code:
 git clone https://github.com/itsluketwist/sudoku-gaming.git
 ```
 
-Once cloned, install and use pre-commit to ensure code is in a good state:
+Once cloned, install the package locally in a virtual environment:
 
 ```shell
 python -m venv venv
 
 . venv/bin/activate
 
-pip install pre-commit
+pip install -e ".[dev,img]"
+```
 
+Install and use pre-commit to ensure code is in a good state:
+
+```shell
 pre-commit install
 
 pre-commit run --all-files
@@ -91,11 +101,6 @@ Run the test suite using:
 ```shell
 pytest .
 ```
-
-
-## *to-do*
-
-- Complete `Sudoku.save_as_image(...)` method.
 
 
 ## *inspiration*

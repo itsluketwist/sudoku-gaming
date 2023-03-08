@@ -1,8 +1,14 @@
 from copy import deepcopy
+from datetime import datetime
 from typing import Optional, Union
 
 from sudoku_gaming.types import SudokuBoard
-from sudoku_gaming.utils import _board_string, _check_for_duplicates, _recursive_solve
+from sudoku_gaming.utils import (
+    _board_string,
+    _check_for_duplicates,
+    _get_table_fill_color_matrix,
+    _recursive_solve,
+)
 
 
 class Sudoku:
@@ -177,13 +183,61 @@ class Sudoku:
         if _check_for_duplicates(self._board):
             raise TypeError("Sudoku is invalid, has duplicate values.")
 
-    def save_as_image(self, location: str) -> None:
+    def save_as_image(self, location: str = "./", name: Optional[str] = None) -> None:
         """
-        Saves the current board as an image file.
+        Saves the current board as a png image file.
 
         Parameters
         ----------
         location : str
             File location for where the image should be saved.
+        name : Optional[str]
+            Name of the file to save, excluding the file extension.
+            If None, will default to `sudoku_{current_datetime}`.
         """
-        raise NotImplementedError()
+        try:
+            import plotly.graph_objects as go
+
+            # default the file name
+            if name is None:
+                name = f"sudoku_{datetime.now().isoformat()}"
+
+            # build list of column data
+            table_data = []
+            for col in range(9):
+                _next_col = []
+                for row in range(9):
+                    if self._board[row][col] == 0:
+                        _next_col.append("")
+                    else:
+                        _next_col.append(f"{self._board[row][col]}")
+                table_data.append(_next_col)
+
+            fig = go.Figure(
+                data=[
+                    go.Table(
+                        header=dict(
+                            fill_color="rgba(0,0,0,0)",
+                        ),
+                        cells=dict(
+                            values=table_data,
+                            height=30,
+                            align="center",
+                            fill_color=_get_table_fill_color_matrix(),
+                        ),
+                        columnwidth=30,
+                    ),
+                ],
+                layout=go.Layout(
+                    dict(
+                        width=500,
+                        height=500,
+                    )
+                ),
+            )
+            fig.write_image(f"{location}{name}.png")
+
+        except ImportError:
+            print(
+                "InstallError: You must install with the 'img' extra in order to save images."
+            )
