@@ -4,6 +4,7 @@ A simple sudoku gameplay client, including:
 - a sudoku generator with difficulty options,
 - and an efficient sudoku solver using a depth-first backtracking algorithm.
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## *installation*
 
