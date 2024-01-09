@@ -4,7 +4,14 @@ A simple sudoku gameplay client, including:
 - a sudoku generator with difficulty options,
 - and an efficient sudoku solver using a depth-first backtracking algorithm.
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+<div>
+    <a href="https://opensource.org/licenses/MIT">
+        <img alt="MIT License" src="https://img.shields.io/badge/Licence-MIT-yellow?style=for-the-badge&logo=docs&logoColor=white" />
+    </a>
+    <a href="https://www.python.org/">
+        <img alt="Python 3" src="https://img.shields.io/badge/Python_3-37709F?style=for-the-badge&logo=python&logoColor=white" />
+    </a>
+</div>
 
 ## *installation*
 

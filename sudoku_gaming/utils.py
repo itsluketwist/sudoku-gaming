@@ -1,5 +1,4 @@
 from random import shuffle
-from typing import Optional
 
 from sudoku_gaming.types import SudokuBoard
 
@@ -109,7 +108,7 @@ def _check_for_duplicates(board: SudokuBoard) -> bool:
     return False
 
 
-def _recursive_solve(sudoku: SudokuBoard) -> Optional[SudokuBoard]:
+def _recursive_solve(sudoku: SudokuBoard) -> SudokuBoard | None:
     """
     Solves a Sudoku puzzle recursively, using a depth-first backtracking
     algorithm. Each blank cell will be filled in order of which has the least
@@ -121,7 +120,7 @@ def _recursive_solve(sudoku: SudokuBoard) -> Optional[SudokuBoard]:
 
     Returns
     -------
-    Optional[Sudoku]
+    SudokuBoard | None
         Return the solution if one is found, otherwise None.
     """
     empty_cells = []  # initialise list

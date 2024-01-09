@@ -1,6 +1,5 @@
 from copy import deepcopy
 from datetime import datetime
-from typing import Optional, Union
 
 from sudoku_gaming.types import SudokuBoard
 from sudoku_gaming.utils import (
@@ -17,11 +16,11 @@ class Sudoku:
     to update the board state and display it.
     """
 
-    def __init__(self, board: Union[SudokuBoard, str, None] = None):
+    def __init__(self, board: SudokuBoard | str | None = None):
         """
         Parameters
         ----------
-        board : Union[SudokuBoard, str, None]
+        board : SudokuBoard | str | None
             A representation of the Sudoku board. Either:
                 - 9x9 array of integers,
                 - comma-separated string of the rows,
@@ -40,10 +39,10 @@ class Sudoku:
         self._validate()
 
         self._original = deepcopy(self._board)
-        self._solved: Optional[SudokuBoard] = None
+        self._solved: SudokuBoard | None = None
         self._solve_attempted = False
 
-    def get(self, row: int, col: int) -> Optional[int]:
+    def get(self, row: int, col: int) -> int | None:
         """
         Return the value of a cell from the sudoku board.
 
@@ -56,7 +55,7 @@ class Sudoku:
 
         Returns
         -------
-        Optional[int]
+        int | None
             Will return the value of the specified cell, or None if invalid inputs were given.
         """
         # first check inputs are valid
@@ -105,14 +104,14 @@ class Sudoku:
         return self._original
 
     @property
-    def solved(self) -> Optional[SudokuBoard]:
+    def solved(self) -> SudokuBoard | None:
         """
         Getter for the solved version of the Sudoku game board.
         Will try to solve if not yet attempted.
 
         Returns
         -------
-        Optional[SudokuBoard]
+        SudokuBoard | None
             A solved SudokuBoard, or None if no solution to the original puzzle exists.
         """
         # check if sudoku has already been solved
@@ -183,7 +182,7 @@ class Sudoku:
         if _check_for_duplicates(self._board):
             raise TypeError("Sudoku is invalid, has duplicate values.")
 
-    def save_as_image(self, location: str = "./", name: Optional[str] = None) -> None:
+    def save_as_image(self, location: str = "./", name: str | None = None) -> None:
         """
         Saves the current board as a png image file.
 
@@ -191,7 +190,7 @@ class Sudoku:
         ----------
         location : str
             File location for where the image should be saved.
-        name : Optional[str]
+        name : str | None
             Name of the file to save, excluding the file extension.
             If None, will default to `sudoku_{current_datetime}`.
         """

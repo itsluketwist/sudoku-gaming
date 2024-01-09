@@ -1,6 +1,5 @@
 from itertools import product
 from random import sample
-from typing import Optional, Union
 
 from sudoku_gaming.sudoku import Sudoku, SudokuBoard
 
@@ -45,18 +44,18 @@ def generate(difficulty: int = 5) -> Sudoku:
     return Sudoku(sudoku.board)
 
 
-def solve(sudoku: Union[Sudoku, SudokuBoard, str]) -> Optional[Sudoku]:
+def solve(sudoku: Sudoku | SudokuBoard | str) -> Sudoku | None:
     """
     Solve the provided Sudoku puzzle.
 
     Parameters
     ----------
-    sudoku : Union[Sudoku, SudokuBoard, str]
+    sudoku : Sudoku | SudokuBoard | str
         A sudoku puzzle in any of the supported formats.
 
     Returns
     -------
-    Optional[Sudoku]
+    Sudoku | None
         A Sudoku object, containing the original puzzle and the solution, if one exists.
     """
     # before solving, wrap the puzzle in the Sudoku class and check it's valid
