@@ -72,6 +72,10 @@ easy_sudoku.show_solved()
 hard_sudoku = generate(difficulty=8)
 hard_sudoku.show_board()
 hard_sudoku.show_solved()
+
+# create a medium sudoku and save for later
+sudoku = generate()
+sudoku.save_as_image()
 ```
 
 
@@ -115,3 +119,8 @@ pytest .
 
 I created the sudoku solver code as part of a project during my masters, and thought it would be fun to try
 and expand the functionality, whilst getting practice in creating python packages.
+
+
+## *example*
+
+![Example sudoku](example.png)

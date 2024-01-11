@@ -1,5 +1,6 @@
 from copy import deepcopy
 from datetime import datetime
+from pathlib import Path
 
 from sudoku_gaming.types import SudokuBoard
 from sudoku_gaming.utils import (
@@ -197,6 +198,9 @@ class Sudoku:
         try:
             import plotly.graph_objects as go
 
+            # initialise the save location
+            save_path = Path(location)
+
             # default the file name
             if name is None:
                 name = f"sudoku_{datetime.now().isoformat()}"
@@ -212,11 +216,11 @@ class Sudoku:
                         _next_col.append(f"{self._board[row][col]}")
                 table_data.append(_next_col)
 
-            fig = go.Figure(
+            figure = go.Figure(
                 data=[
                     go.Table(
                         header=dict(
-                            fill_color="rgba(0,0,0,0)",
+                            fill_color="white",
                         ),
                         cells=dict(
                             values=table_data,
@@ -234,7 +238,8 @@ class Sudoku:
                     )
                 ),
             )
-            fig.write_image(f"{location}{name}.png")
+
+            figure.write_image(save_path / f"{name}.png")
 
         except ImportError:
             print(
