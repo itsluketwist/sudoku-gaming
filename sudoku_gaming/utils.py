@@ -9,8 +9,8 @@ def _board_string(board: SudokuBoard, title: str = "Sudoku") -> str:
 
     Parameters
     ----------
-    board : SudokuBoard
-    title : str
+    board: SudokuBoard
+    title: str = "Sudoku"
 
     Returns
     -------
@@ -30,9 +30,9 @@ def _find_possible_values(sudoku: SudokuBoard, row: int, col: int):
 
     Parameters
     ----------
-    sudoku : SudokuBoard
-    row : integer
-    col : integer
+    sudoku: SudokuBoard
+    row: integer
+    col: integer
 
     Returns
     -------
@@ -71,7 +71,7 @@ def _check_for_duplicates(board: SudokuBoard) -> bool:
 
     Parameters
     ----------
-    board : SudokuBoard
+    board: SudokuBoard
         The sudoku board to check.
 
     Returns
@@ -116,7 +116,7 @@ def _recursive_solve(sudoku: SudokuBoard) -> SudokuBoard | None:
 
     Parameters
     ----------
-    sudoku : SudokuBoard
+    sudoku: SudokuBoard
 
     Returns
     -------
@@ -160,8 +160,8 @@ def _get_table_fill_color_matrix(color_1: str = "#CBE9FF", color_2: str = "#FDF2
 
     Parameters
     ----------
-    color_1 : str
-    color_2 : str
+    color_1: str = "#CBE9FF"
+    color_2: str = "#FDF2FF"
         Both colors must be valid color strings (as per plotly).
     """
     row_fill_1 = [

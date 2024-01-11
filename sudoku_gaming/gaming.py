@@ -10,7 +10,7 @@ def generate(difficulty: int = 5) -> Sudoku:
 
     Parameters
     ----------
-    difficulty : int
+    difficulty: int = 5
         Scale of 1 to 9, indicating how much of the board is already filled in.
         Defaults to 5 (medium difficulty).
 
@@ -50,7 +50,7 @@ def solve(sudoku: Sudoku | SudokuBoard | str) -> Sudoku | None:
 
     Parameters
     ----------
-    sudoku : Sudoku | SudokuBoard | str
+    sudoku: Sudoku | SudokuBoard | str
         A sudoku puzzle in any of the supported formats.
 
     Returns

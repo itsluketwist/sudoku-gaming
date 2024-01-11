@@ -20,7 +20,7 @@ class Sudoku:
         """
         Parameters
         ----------
-        board : SudokuBoard | str | None
+        board: SudokuBoard | str | None = None
             A representation of the Sudoku board. Either:
                 - 9x9 array of integers,
                 - comma-separated string of the rows,
@@ -48,9 +48,9 @@ class Sudoku:
 
         Parameters
         ----------
-        row : int
+        row: int
             Must be a value between 1 and 9 inclusive.
-        col : int
+        col: int
             Must be a value between 1 and 9 inclusive.
 
         Returns
@@ -73,11 +73,11 @@ class Sudoku:
 
         Parameters
         ----------
-        row : int
+        row: int
             Must be a value between 1 and 9 inclusive.
-        col : int
+        col: int
             Must be a value between 1 and 9 inclusive.
-        value : int
+        value: int
             Must be a value between 0 and 9 inclusive (0 clears the cell).
         """
         # first check inputs are valid
@@ -188,9 +188,9 @@ class Sudoku:
 
         Parameters
         ----------
-        location : str
+        location: str = "./"
             File location for where the image should be saved.
-        name : str | None
+        name: str | None = None
             Name of the file to save, excluding the file extension.
             If None, will default to `sudoku_{current_datetime}`.
         """

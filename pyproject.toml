@@ -7,7 +7,7 @@ packages = ["sudoku_gaming"]
 
 [project]
 name = "sudoku_gaming"
-version = "1.0.0"
+version = "1.0.1"
 description = "A sudoku gameplay client."
 readme = "README.md"
 authors = [{ name = "Lukas Twist", email = "itsluketwist@gmail.com" }]
