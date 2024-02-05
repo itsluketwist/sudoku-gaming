@@ -18,13 +18,13 @@ A simple sudoku gameplay client, including:
 Install directly from GitHub, using pip:
 
 ```shell
-pip install git+https://github.com/itsluketwist/sudoku-gaming
+pip install 'git+https://github.com/itsluketwist/sudoku-gaming'
 ```
 
 Use the `img` extra when installing to be able to save sudokus as images:
 
 ```shell
-pip install git+https://github.com/itsluketwist/sudoku-gaming#egg=sudoku_gaming[img]
+pip install 'sudoku_gaming[img]@git+https://github.com/itsluketwist/sudoku-gaming'
 ```
 
 
